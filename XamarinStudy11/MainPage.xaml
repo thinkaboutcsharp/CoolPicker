@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:local="clr-namespace:XamarinStudy11" x:Class="XamarinStudy11.MainPage" xmlns:cool="clr-namespace:CoolPicker;assembly=CoolPicker">
+    <StackLayout>
+        <StackLayout.Margin>
+            <OnPlatform x:TypeArguments="Thickness"
+                        iOS="0, 40, 0, 0"/>
+        </StackLayout.Margin>
+        <!-- Place new controls here -->
+        <Label Text="Welcome to Xamarin.Forms!" HorizontalOptions="Center" VerticalOptions="Center" />
+        <cool:CoolPicker x:Name="pck_CoolPicker" Margin="10, 0, 10, 0" Title="Cool Wheel"
+                         HeightRequest="40"
+                         BackgroundColor="Silver"
+                         TextColor="Olive"
+                         PlaceholderColor="Maroon"
+                         Border="true"
+                         BorderWidth="3"
+                         BorderRadius="6"
+                         BorderColor="Blue"
+                         PickerColor="Green"
+                         PickerBarColor="Purple"
+                         PickerTextColor="Yellow"
+                         PickerBarTextColor="Lime"
+                         />
+        <Picker x:Name="pck_NormalPicker" Margin="10, 0, 10, 0" Title="Normal Wheel"/>
+    </StackLayout>
+</ContentPage>
