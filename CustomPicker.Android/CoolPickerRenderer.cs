@@ -13,6 +13,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 using xColor = Xamarin.Forms.Color;
 using aTextAlignment = Android.Views.TextAlignment;
+using System.ComponentModel;
 
 [assembly: ExportRenderer(typeof(CoolPicker.CoolPicker), typeof(CoolPicker.Android.CoolPickerRenderer))]
 
@@ -30,19 +31,18 @@ namespace CoolPicker.Android
         protected override EditText CreateNativeControl()
         {
             var picker = Element as CoolPicker;
-            var background = new GradientDrawable();
-            background.SetColor(xColor.Transparent.ToAndroid());
 
             //for hook click
             var field = new CoolField(Context) { Focusable = true, Clickable = true, Tag = this };
 
             if (picker.Border)
             {
+                var background = new GradientDrawable();
                 background.SetStroke(2, picker.BorderColor.ToAndroid());
                 field.SetPadding(40, 0, 0, 0);
+                field.SetBackground(background);
             }
 
-            field.SetBackground(background);
             return field;
         }
 
@@ -52,8 +52,15 @@ namespace CoolPicker.Android
 
             Control.InputType = InputTypes.Null; //necessary
 
-            Control.SetHintTextColor(((CoolPicker)Element).PlaceholderColor.ToAndroid());
+            var picker = Element as CoolPicker;
+            if (picker.PlaceholderColor != xColor.Default)
+                Control.SetHintTextColor(picker.PlaceholderColor.ToAndroid());
             Control.FocusChange += (s, a) => { if (a.HasFocus) OnClick(); };
+        }
+
+        protected override void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            base.OnElementPropertyChanged(sender, e);
         }
 
         void OnClick()

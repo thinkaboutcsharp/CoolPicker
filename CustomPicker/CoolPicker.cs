@@ -5,7 +5,7 @@ namespace CoolPicker
 {
     public class CoolPicker : Picker
     {
-        public static readonly BindableProperty BorderProperty = BindableProperty.Create("Border", typeof(bool), typeof(CoolPicker), true);
+        public static readonly BindableProperty BorderProperty = BindableProperty.Create("Border", typeof(bool), typeof(CoolPicker), false);
         public bool Border
         {
             get => (bool)GetValue(BorderProperty);

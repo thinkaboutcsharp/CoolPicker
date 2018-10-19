@@ -8,18 +8,6 @@
         <!-- Place new controls here -->
         <Label Text="Welcome to Xamarin.Forms!" HorizontalOptions="Center" VerticalOptions="Center" />
         <cool:CoolPicker x:Name="pck_CoolPicker" Margin="10, 0, 10, 0" Title="Cool Wheel"
-                         HeightRequest="40"
-                         BackgroundColor="#FFFFFAF0"
-                         TextColor="#FFFF00FF"
-                         PlaceholderColor="#FFB0E0E6"
-                         Border="true"
-                         BorderWidth="3"
-                         BorderRadius="6"
-                         BorderColor="Blue"
-                         PickerColor="#FF98FB98"
-                         PickerBarColor="#FFB0C4DE"
-                         PickerTextColor="#FF006400"
-                         PickerBarTextColor="#FFFFA500"
                          />
         <Picker x:Name="pck_NormalPicker" Margin="10, 0, 10, 0" Title="Normal Wheel"/>
     </StackLayout>
