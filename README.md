@@ -15,7 +15,7 @@ I wanted Picker that can customize detail colors for individual use. I make NuGe
 Some properties are available only for iOS. Try hard, I maybe have ability to realize all for Android. But both have different culture. I avoid difference from other apps.
 
 Android版のピッカーをどうにかして標準の見え方に合わせようとしましたが、何か難しい課題の気配を感じたので断念しました。  
-I tried very hard to show picker dialog as standard Picker, but for smelled something difficult, I resign.
+I tried very hard to show picker dialog as standard Picker, but for smells something difficult, I resign.
 
 ---
 ### テキスト Text
