@@ -3,6 +3,7 @@ using System.Linq;
 using Android.App;
 using Android.Content;
 using Android.Graphics.Drawables;
+using aColor = Android.Graphics.Color;
 using Android.Graphics.Drawables.Shapes;
 using Android.Runtime;
 using Android.Text;
@@ -23,10 +24,24 @@ namespace CoolPicker.Android
     {
         IElementController ElementController => Element as IElementController;
 
+        aColor defaultPlaceholderTextColor;
+
+        struct Padding
+        {
+            internal int Start;
+            internal int End;
+            internal int Top;
+            internal int Bottom;
+        }
+        Padding defaultTextFieldPadding;
+        Drawable defaultTextFieldDrawable;
+
         AlertDialog pickerView;
 
         public CoolPickerRenderer(Context context) : base(context)
-        {}
+        {
+            defaultTextFieldPadding = new Padding();
+        }
 
         protected override EditText CreateNativeControl()
         {
@@ -34,6 +49,11 @@ namespace CoolPicker.Android
 
             //for hook click
             var field = new CoolField(Context) { Focusable = true, Clickable = true, Tag = this };
+            defaultTextFieldPadding.Start = field.PaddingStart;
+            defaultTextFieldPadding.End = field.PaddingEnd;
+            defaultTextFieldPadding.Top = field.PaddingTop;
+            defaultTextFieldPadding.Bottom = field.PaddingBottom;
+            defaultTextFieldDrawable = field.Background;
 
             if (picker.Border)
             {
@@ -50,17 +70,36 @@ namespace CoolPicker.Android
         {
             base.OnElementChanged(e);
 
-            Control.InputType = InputTypes.Null; //necessary
+            //Control.InputType = InputTypes.Null; //necessary
+
+            defaultPlaceholderTextColor = ConvertArgbColor(Control.CurrentHintTextColor);
 
             var picker = Element as CoolPicker;
             if (picker.PlaceholderColor != xColor.Default)
                 Control.SetHintTextColor(picker.PlaceholderColor.ToAndroid());
             Control.FocusChange += (s, a) => { if (a.HasFocus) OnClick(); };
+
+            aColor ConvertArgbColor(int argb)
+            {
+                var alpha = argb & 0xFF000000 >> 24;
+                var red = argb & 0x00FF0000 >> 16;
+                var green = argb & 0x0000FF00 >> 8;
+                var blue = argb & 0x000000FF;
+
+                return aColor.Argb((int)alpha, red, green, blue);
+            }
         }
 
         protected override void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             base.OnElementPropertyChanged(sender, e);
+
+            if (e.PropertyName == CoolPicker.BorderProperty.PropertyName)
+                UpdateBorder();
+            else if (e.PropertyName == CoolPicker.BorderColorProperty.PropertyName)
+                UpdateBorder();
+            else if (e.PropertyName == CoolPicker.PlaceholderColorProperty.PropertyName)
+                UpdatePlaceholder();
         }
 
         void OnClick()
@@ -112,6 +151,47 @@ namespace CoolPicker.Android
                 ElementController?.SetValueFromRenderer(VisualElement.IsFocusedPropertyKey, false);
             };
             pickerView.Show();
+        }
+
+        void UpdateBorder()
+        {
+            var picker = Element as CoolPicker;
+            var field = Control as CoolField;
+
+            if (picker.Border)
+            {
+                var background = new GradientDrawable();
+                background.SetStroke(2, picker.BorderColor.ToAndroid());
+                field.SetPaddingRelative(
+                    30,
+                    defaultTextFieldPadding.End,
+                    defaultTextFieldPadding.Top + 5,
+                    defaultTextFieldPadding.Bottom
+                );
+                field.SetBackground(background);
+            }
+            else
+            {
+                field.SetBackground(defaultTextFieldDrawable);
+                field.SetPaddingRelative(
+                    defaultTextFieldPadding.Start,
+                    defaultTextFieldPadding.End,
+                    defaultTextFieldPadding.Top,
+                    defaultTextFieldPadding.Bottom
+                );
+            }
+        }
+
+        void UpdatePlaceholder()
+        {
+            var picker = Element as CoolPicker;
+            if (Control.CurrentHintTextColor != picker.PlaceholderColor.ToAndroid().ToArgb())
+            {
+                if (picker.PlaceholderColor != xColor.Default)
+                    Control.SetHintTextColor(picker.PlaceholderColor.ToAndroid());
+                else
+                    Control.SetHintTextColor(defaultPlaceholderTextColor);
+            }
         }
 
         class CoolField : EditText

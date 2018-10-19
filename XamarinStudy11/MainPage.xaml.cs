@@ -24,6 +24,20 @@ namespace XamarinStudy11
             pck_NormalPicker.ItemsSource = list;
         }
 
+        void OnToggleClicked(object sender, EventArgs args)
+        {
+            if (pck_CoolPicker.Border)
+            {
+                pck_CoolPicker.Border = false;
+                pck_CoolPicker.BorderColor = Color.Red;
+            }
+            else
+            {
+                pck_CoolPicker.Border = true;
+                pck_CoolPicker.BorderColor = Color.Blue;
+            }
+        }
+
         class PickerItem
         {
             public string Text { get; set; }

@@ -1,6 +1,7 @@
 # CoolPicker - Beautiful
 
-__Android is in process__
+__ただ動いた状態です。これからPropertyChanged系の動作確認をします。__  
+__It just runnable. I will check functions of PropertyChanged.__
 
 様々な色設定ができるPickerがほしくて個人的用途で作成しています。取り回すためにNuGetにはしますが、あまりにもXamarin本家の実装に依存しているため、メンテナンスの保証ができないという理由から、NuGet Galleryには公開しません。ソースに関してはMITライセンスに則ります。こんなに激しく依存性の高いコードを今時書く奴がいるのかと思いながら読んでみるといいかもしれません。  
 I wanted Picker that can customize detail colors for individual use. I make NuGet package but never publish at NuGet Gallery because it is deep depends on Xamarin original implementations, so I can not guarantee its safety. Sources is MIT licensed so everyone can read and use it. I suggest to  read it for feel "How serious dependency is it! I can't believe him...".

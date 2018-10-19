@@ -7,8 +7,8 @@
         </StackLayout.Margin>
         <!-- Place new controls here -->
         <Label Text="Welcome to Xamarin.Forms!" HorizontalOptions="Center" VerticalOptions="Center" />
-        <cool:CoolPicker x:Name="pck_CoolPicker" Margin="10, 0, 10, 0" Title="Cool Wheel"
-                         />
+        <cool:CoolPicker x:Name="pck_CoolPicker" Margin="10, 0, 10, 0" Title="Cool Wheel"/>
         <Picker x:Name="pck_NormalPicker" Margin="10, 0, 10, 0" Title="Normal Wheel"/>
+        <Button Text="Toggle Border" Clicked="OnToggleClicked"/>
     </StackLayout>
 </ContentPage>
