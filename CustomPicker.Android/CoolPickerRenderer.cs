@@ -4,16 +4,11 @@ using Android.App;
 using Android.Content;
 using Android.Graphics.Drawables;
 using aColor = Android.Graphics.Color;
-using Android.Graphics.Drawables.Shapes;
-using Android.Runtime;
-using Android.Text;
-using Android.Util;
 using Android.Views;
 using Android.Widget;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 using xColor = Xamarin.Forms.Color;
-using aTextAlignment = Android.Views.TextAlignment;
 using System.ComponentModel;
 
 [assembly: ExportRenderer(typeof(CoolPicker.CoolPicker), typeof(CoolPicker.Android.CoolPickerRenderer))]
@@ -69,8 +64,7 @@ namespace CoolPicker.Android
         protected override void OnElementChanged(ElementChangedEventArgs<Picker> e)
         {
             base.OnElementChanged(e);
-
-            //Control.InputType = InputTypes.Null; //necessary
+            if (e.NewElement == null) return;
 
             defaultPlaceholderTextColor = ConvertArgbColor(Control.CurrentHintTextColor);
 

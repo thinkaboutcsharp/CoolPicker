@@ -20,11 +20,17 @@ namespace CoolPicker.iOS
 
         readonly HashSet<string> enableActions;
 
+        UIColor defaultTextColor;
+
         internal ExtendedField() : base(new CGRect())
         {
             string[] actions = { "copy:", "select:", "selectAll:" };
             enableActions = new HashSet<string>(actions);
+
+            defaultTextColor = TextColor;
         }
+
+        internal void ResetTextColor() => TextColor = defaultTextColor;
 
         public override NSAttributedString AttributedText
         {
@@ -69,10 +75,16 @@ namespace CoolPicker.iOS
 
         int selectedIndex;
 
+        double defaultHeight;
+
         protected override void OnElementChanged(ElementChangedEventArgs<Picker> e)
         {
             base.OnElementChanged(e);
+            if (e.NewElement == null) return;
+
             ReplaceEntry((CoolPicker)e.NewElement);
+
+            defaultHeight = e.NewElement.HeightRequest;
 
             Control.Superview.ClipsToBounds = true;
 
@@ -150,7 +162,7 @@ namespace CoolPicker.iOS
                     {
                         UpdatePickerSelectedIndex(0);
                     }
-                    Control.TextColor = Element.TextColor.ToUIColor();
+                    UpdateTextColor();
                     Control.Text = Element.Items[selectedIndex];
                     ElementController.SetValueFromRenderer(Picker.SelectedIndexProperty, selectedIndex);
                     customEntry.ResignFirstResponder();
@@ -160,7 +172,8 @@ namespace CoolPicker.iOS
                 toolBarItems[1].TintColor = newPicker.PickerBarTextColor.ToUIColor();
             toolBar.SetItems(toolBarItems, false);
 
-            var pickerView = (UIPickerView)Control.InputView;
+            var pickerView = new UIPickerView();
+            customEntry.InputView = pickerView;
             var model = new CoolModel(this);
             pickerView.Model = model;
             pickerView.WeakDelegate = model;
@@ -168,6 +181,7 @@ namespace CoolPicker.iOS
                 pickerView.BackgroundColor = newPicker.PickerColor.ToUIColor();
 
             originalEntry.RemoveFromSuperview();
+            originalEntry.Dispose();
             SetNativeControl(customEntry);
         }
 
@@ -212,9 +226,16 @@ namespace CoolPicker.iOS
 
             GetSet(out var picker, out var entry, out var view);
             if (picker.BorderWidth >= 0)
+            {
+                var oldWidth = view.Layer.BorderWidth;
                 view.Layer.BorderWidth = picker.BorderWidth;
+                picker.HeightRequest += (oldWidth - picker.BorderWidth) * 2.0;
+            }
             else
+            {
                 view.Layer.BorderWidth = 0;
+                picker.HeightRequest = defaultHeight;
+            }
         }
 
         void UpdateBorderColor()
@@ -297,7 +318,7 @@ namespace CoolPicker.iOS
 
             var picker = (UIPickerView)Control.InputView;
             picker.Select(Math.Max(formsIndex, 0), 0, true);
-            Control.TextColor = Element.TextColor.ToUIColor();
+            UpdateTextColor();
             Control.Text = formsIndex == -1
                                 ? null
                                 : Element.Items.Count > 0
@@ -305,6 +326,14 @@ namespace CoolPicker.iOS
                                     : null;
             ElementController.SetValueFromRenderer(Picker.SelectedIndexProperty, formsIndex);
             selectedIndex = formsIndex;
+        }
+
+        void UpdateTextColor()
+        {
+            if (Element.TextColor != Color.Default)
+                Control.TextColor = Element.TextColor.ToUIColor();
+            else
+                ((ExtendedField)Control).ResetTextColor();
         }
 
         void GetSet(out CoolPicker picker, out UITextField entry, out UIView view)
@@ -348,7 +377,8 @@ namespace CoolPicker.iOS
             {
                 this.renderer = renderer;
                 picker = renderer.Element as CoolPicker;
-                currentColor = picker.PickerTextColor;
+                currentColor = picker.PickerTextColor == Color.Default ? Color.Black : picker.PickerTextColor;
+                //iOS can not use Color.Default for UIPickerView item title. If use it we will get transparent text.
             }
 
             public override nint GetComponentCount(UIPickerView pickerView)
@@ -363,13 +393,12 @@ namespace CoolPicker.iOS
 
             public override NSAttributedString GetAttributedTitle(UIPickerView pickerView, nint row, nint component)
             {
-                if (picker.PickerTextColor != Color.Default || currentColor != picker.PickerTextColor)
+                if (currentColor != picker.PickerTextColor)
                 {
-                    currentColor = picker.PickerTextColor;
-                    return new NSAttributedString(picker.Items[(int)row], foregroundColor: picker.PickerTextColor.ToUIColor());
+                    currentColor = picker.PickerTextColor == Color.Default ? Color.Black : picker.PickerTextColor;
                 }
-                else
-                    return new NSAttributedString(picker.Items[(int)row], foregroundColor: currentColor.ToUIColor());
+
+                return new NSAttributedString(picker.Items[(int)row], foregroundColor: currentColor.ToUIColor());
             }
 
             public override void Selected(UIPickerView pickerView, nint row, nint component)

@@ -1,5 +1,4 @@
-﻿using System;
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 
 namespace CoolPicker
 {
@@ -26,10 +25,10 @@ namespace CoolPicker
             set { SetValue(BorderColorProperty, value); }
         }
 
-        public static readonly BindableProperty BorderRadiusProperty = BindableProperty.Create("BorderRadius", typeof(int), typeof(CoolPicker), 0);
-        public int BorderRadius
+        public static readonly BindableProperty BorderRadiusProperty = BindableProperty.Create("BorderRadius", typeof(float), typeof(CoolPicker), 0.0f);
+        public float BorderRadius
         {
-            get => (int)GetValue(BorderRadiusProperty);
+            get => (float)GetValue(BorderRadiusProperty);
             set { SetValue(BorderRadiusProperty, value); }
         }
 
