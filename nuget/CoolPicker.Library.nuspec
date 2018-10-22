@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+    <metadata>
+        <id>Tac.CoolPicker</id>
+        <version>0.1.0</version>
+        <title>CoolPicker for Xamarin.Forms</title>
+        <authors>T.A.C.</authors>
+        <owners>T.A.C.</owners>
+        <projectUrl>http://empty.com/</projectUrl>
+        <licenseUrl>http://empty.com/</licenseUrl>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>Extended Picker control for detail coloring.
+        </description>
+        <summary></summary>
+        <releaseNotes>
+        </releaseNotes>
+        <tags>Xamarin.Forms Picker</tags>
+        <dependencies>
+            <dependency id="Xamarin.Forms" version="3.2.0"/>
+        </dependencies>
+    </metadata>
+    <files>
+        <!-- .net standard 2.0 -->
+        <file src="../CustomPicker/bin/Release/netstandard2.0/CoolPicker.dll" target="lib/netstandard2.0" />
+        <file src="../CustomPicker/bin/Release/netstandard2.0/CoolPicker.xml" target="lib/netstandard2.0" />
+        <file src="../CustomPicker/bin/Release/netstandard2.0/CoolPicker.pdb" target="lib/netstandard2.0" />
+
+        <!-- Mono.Android -->
+        <file src="../CustomPicker/bin/Release/netstandard2.0/CoolPicker.dll" target="lib/MonoAndroid" />
+        <file src="../CustomPicker/bin/Release/netstandard2.0/CoolPicker.xml" target="lib/MonoAndroid" />
+        <file src="../CustomPicker/bin/Release/netstandard2.0/CoolPicker.pdb" target="lib/MonoAndroid" />
+        <file src="../CustomPicker.Android/bin/Release/CoolPicker.Android.dll" target="lib/MonoAndroid" />
+        <file src="../CustomPicker.Android/bin/Release/CoolPicker.Android.xml" target="lib/MonoAndroid" />
+        <file src="../CustomPicker.Android/bin/Release/CoolPicker.Android.pdb" target="lib/MonoAndroid" />
+
+        <!-- Xamarin.iOS10 -->
+        <file src="../CustomPicker/bin/Release/netstandard2.0/CoolPicker.dll" target="lib/Xamarin.iOS10" />
+        <file src="../CustomPicker/bin/Release/netstandard2.0/CoolPicker.xml" target="lib/Xamarin.iOS10" />
+        <file src="../CustomPicker/bin/Release/netstandard2.0/CoolPicker.pdb" target="lib/Xamarin.iOS10" />
+        <file src="../CustomPicker.iOS/bin/Release/CoolPicker.iOS.dll" target="lib/Xamarin.iOS10" />
+        <file src="../CustomPicker.iOS/bin/Release/CoolPicker.iOS.xml" target="lib/Xamarin.iOS10" />
+        <file src="../CustomPicker.iOS/bin/Release/CoolPicker.iOS.pdb" target="lib/Xamarin.iOS10" />
+    </files>
+</package>
