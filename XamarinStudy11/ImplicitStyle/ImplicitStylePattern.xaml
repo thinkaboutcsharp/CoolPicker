@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="XamarinStudy11.ImplicitStylePattern" xmlns:local="clr-namespace:XamarinStudy11" xmlns:cool="clr-namespace:CoolPicker;assembly=CoolPicker" Title="Implicit Style Pattern">
+    <ContentPage.BindingContext>
+        <local:ImplicitStylePatternVM x:Name="model"/>
+    </ContentPage.BindingContext>
+    <!-- Style -->
+    <StackLayout>
+        <StackLayout.Resources>
+            <ResourceDictionary>
+                <Style TargetType="cool:CoolPicker">
+                    <Setter Property="TextColor" Value="{DynamicResource pTextColor}" />
+                    <Setter Property="BackgroundColor" Value="{DynamicResource pBackgroundColor}" />
+                    <Setter Property="PlaceholderColor" Value="{DynamicResource pPlaceholderColor}" />
+                    <Setter Property="Border" Value="{DynamicResource pBorder}" />
+                    <Setter Property="BorderColor" Value="{DynamicResource pBorderColor}" />
+                    <Setter Property="BorderWidth" Value="{DynamicResource pBorderWidth}" />
+                    <Setter Property="BorderRadius" Value="{DynamicResource pBorderRadius}" />
+                    <Setter Property="PickerColor" Value="{DynamicResource pPickerColor}" />
+                    <Setter Property="PickerBarColor" Value="{DynamicResource pPickerColor}" />
+                    <Setter Property="PickerTextColor" Value="{DynamicResource pPickerTextColor}" />
+                    <Setter Property="PickerBarTextColor" Value="{DynamicResource pPickerBarTextColor}" />
+                </Style>
+            </ResourceDictionary>
+        </StackLayout.Resources>
+        <cool:CoolPicker x:Name="pck_CoolPicker" Margin="10, 0, 10, 0" Title="Cool Wheel" VerticalOptions="Start" HorizontalOptions="Fill"
+                         ItemsSource="{Binding PickerSource}" ItemDisplayBinding="{Binding Value}" SelectedIndex="{Binding SelectedIndex.Value}"
+                         />
+        <ScrollView Orientation="Vertical" VerticalOptions="FillAndExpand" HorizontalOptions="Fill">
+            <StackLayout>
+                <Button Text="Clear Selection" Command="{Binding ToggleCommand}" CommandParameter="Clear" VerticalOptions="Center"/>
+                <Button Text="Toggle TextColor" Command="{Binding ToggleCommand}" CommandParameter="TextColor" VerticalOptions="Center"/>
+                <Button Text="Toggle PlaceholderColor" Command="{Binding ToggleCommand}" CommandParameter="PlaceholderColor" VerticalOptions="Center"/>
+                <Button Text="Toggle BackgroundColor" Command="{Binding ToggleCommand}" CommandParameter="BackgroundColor" VerticalOptions="Center"/>
+                <Button Text="Toggle Border" Command="{Binding ToggleCommand}" CommandParameter="Border" VerticalOptions="Center"/>
+                <Button Text="Toggle BorderColor" Command="{Binding ToggleCommand}" CommandParameter="BorderColor" VerticalOptions="Center"/>
+                <Button Text="Toggle BorderWidth" Command="{Binding ToggleCommand}" CommandParameter="BorderWidth" VerticalOptions="Center"/>
+                <Button Text="Toggle BorderRadius" Command="{Binding ToggleCommand}" CommandParameter="BorderRadius" VerticalOptions="Center"/>
+                <Button Text="Toggle PickerColor" Command="{Binding ToggleCommand}" CommandParameter="PickerColor" VerticalOptions="Center"/>
+                <Button Text="Toggle PickerBarColor" Command="{Binding ToggleCommand}" CommandParameter="PickerBarColor" VerticalOptions="Center"/>
+                <Button Text="Toggle PickerTextColor" Command="{Binding ToggleCommand}" CommandParameter="PickerTextColor" VerticalOptions="Center"/>
+                <Button Text="Toggle PickerBarTextColor" Command="{Binding ToggleCommand}" CommandParameter="PickerBarTextColor" VerticalOptions="Center"/>
+                <BoxView VerticalOptions="FillAndExpand"/>
+            </StackLayout>
+        </ScrollView>
+    </StackLayout>
+</ContentPage>

@@ -12,8 +12,16 @@
   <ItemGroup>
     <PackageReference Include="Xamarin.Forms" Version="3.3.0.912540" />
     <PackageReference Include="AiForms.Effects" Version="1.3.1" />
+    <PackageReference Include="ReactiveProperty" Version="5.2.0" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CustomPicker\CoolPicker.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="ToggleProperty.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Binding\" />
+    <Folder Include="ImplicitStyle\" />
   </ItemGroup>
 </Project>

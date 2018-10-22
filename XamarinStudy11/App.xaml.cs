@@ -11,7 +11,7 @@ namespace XamarinStudy11
         {
             InitializeComponent();
 
-            MainPage = new MainPage();
+            MainPage = new MainPage(new StartPage());
         }
 
         protected override void OnStart()

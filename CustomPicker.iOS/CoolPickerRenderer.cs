@@ -215,9 +215,17 @@ namespace CoolPicker.iOS
 
             GetSet(out var picker, out var entry, out var view);
             if (picker.Border && picker.BorderWidth > 0)
+            {
                 entry.BorderStyle = UITextBorderStyle.None;
+                UpdateBorderColor();
+                UpdateBorderRadius();
+                UpdateBorderWidth();
+            }
             else
+            {
                 entry.BorderStyle = UITextBorderStyle.RoundedRect;
+                UpdateBorderWidth();
+            }
         }
 
         void UpdateBorderWidth()
@@ -225,11 +233,11 @@ namespace CoolPicker.iOS
             if (Element == null) return;
 
             GetSet(out var picker, out var entry, out var view);
-            if (picker.BorderWidth >= 0)
+            if (picker.Border && picker.BorderWidth >= 0)
             {
                 var oldWidth = view.Layer.BorderWidth;
                 view.Layer.BorderWidth = picker.BorderWidth;
-                picker.HeightRequest += (oldWidth - picker.BorderWidth) * 2.0;
+                picker.HeightRequest = picker.Height + (picker.BorderWidth - oldWidth) * 2.0;
             }
             else
             {
@@ -243,8 +251,12 @@ namespace CoolPicker.iOS
             if (Element == null) return;
 
             GetSet(out var picker, out var entry, out var view);
+            if (!picker.Border) return;
+
             if (picker.BorderColor != Color.Default)
                 view.Layer.BorderColor = picker.BorderColor.ToCGColor();
+            else
+                view.Layer.BorderColor = Color.Black.ToCGColor();
         }
 
         void UpdateBorderRadius()
@@ -252,6 +264,8 @@ namespace CoolPicker.iOS
             if (Element == null) return;
 
             GetSet(out var picker, out var entry, out var view);
+            if (!picker.Border) return;
+
             view.Layer.CornerRadius = picker.BorderRadius;
         }
 

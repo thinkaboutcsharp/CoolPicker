@@ -1,15 +1,22 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Reflection;
 using System.Linq;
 using Android.App;
 using Android.Content;
 using Android.Graphics.Drawables;
 using aColor = Android.Graphics.Color;
 using Android.Views;
+using aView = Android.Views.View;
 using Android.Widget;
+using wOrientation = Android.Widget.Orientation;
+using Android.Content.Res;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 using xColor = Xamarin.Forms.Color;
 using System.ComponentModel;
+using Android.Graphics;
+using Android.Runtime;
 
 [assembly: ExportRenderer(typeof(CoolPicker.CoolPicker), typeof(CoolPicker.Android.CoolPickerRenderer))]
 
@@ -75,12 +82,12 @@ namespace CoolPicker.Android
 
             aColor ConvertArgbColor(int argb)
             {
-                var alpha = argb & 0xFF000000 >> 24;
-                var red = argb & 0x00FF0000 >> 16;
-                var green = argb & 0x0000FF00 >> 8;
-                var blue = argb & 0x000000FF;
+                var alpha = (argb >> 24) & 0xFF;
+                var red = (argb >> 16) & 0xFF;
+                var green = (argb >> 8) & 0xFF;
+                var blue = argb & 0xFF;
 
-                return aColor.Argb((int)alpha, red, green, blue);
+                return aColor.Argb(alpha, red, green, blue);
             }
         }
 
@@ -101,7 +108,7 @@ namespace CoolPicker.Android
             var type = Control.InputType;
 
             var picker = Element as CoolPicker;
-            var dataPicker = new CoolDataPicker(Context, picker.PickerColor, picker.PickerTextColor);
+            var dataPicker = new CoolDataPicker(Context) { BackgroundColor = picker.PickerColor };
             if (picker.Items != null && picker.Items.Count > 0)
             {
                 dataPicker.MaxValue = picker.Items.Count - 1;
@@ -112,7 +119,7 @@ namespace CoolPicker.Android
                 dataPicker.Value = picker.SelectedIndex;
             }
 
-            var layout = new LinearLayout(Context) { Orientation = Orientation.Vertical };
+            var layout = new LinearLayout(Context) { Orientation = wOrientation.Vertical };
             layout.AddView(dataPicker);
 
             ElementController.SetValueFromRenderer(VisualElement.IsFocusedPropertyKey, true);
@@ -190,10 +197,12 @@ namespace CoolPicker.Android
 
         class CoolField : EditText
         {
+            //avoid parent level event binding
             public new event EventHandler<KeyEventArgs> KeyPress;
 
             internal CoolField(Context context) : base(context)
             {
+                //original binding
                 base.KeyPress += (s, a) => a.Handled = true;
             }
 
@@ -215,13 +224,11 @@ namespace CoolPicker.Android
 
         class CoolDataPicker : NumberPicker
         {
-            xColor textColor;
+            xColor backgroundColor = xColor.Default;
+            internal xColor BackgroundColor { get => backgroundColor; set { SetBackgroundColor(value.ToAndroid()); backgroundColor = value; } }
 
-            internal CoolDataPicker(Context context, xColor background, xColor text) : base(context)
-            {
-                SetBackgroundColor(background.ToAndroid());
-                this.textColor = text;
-            }
+            internal CoolDataPicker(Context context) : base(context) { }
+
         }
     }
 }
