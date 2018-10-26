@@ -18,9 +18,9 @@ using System.ComponentModel;
 using Android.Graphics;
 using Android.Runtime;
 
-[assembly: ExportRenderer(typeof(CoolPicker.CoolPicker), typeof(CoolPicker.Android.CoolPickerRenderer))]
+[assembly: ExportRenderer(typeof(CoolControl.CoolPicker), typeof(CoolControl.Android.CoolPickerRenderer))]
 
-namespace CoolPicker.Android
+namespace CoolControl.Android
 {
     public class CoolPickerRenderer : PickerRenderer
     {
@@ -80,6 +80,7 @@ namespace CoolPicker.Android
             if (picker.PlaceholderColor != xColor.Default)
                 Control.SetHintTextColor(picker.PlaceholderColor.ToAndroid());
             Control.FocusChange += (s, a) => { if (a.HasFocus) OnClick(); };
+            Control.Gravity = ExchangeAlignmentFlag(picker.HorizontalTextAlignment);
 
             aColor ConvertArgbColor(int argb)
             {
@@ -102,6 +103,28 @@ namespace CoolPicker.Android
                 UpdateBorder();
             else if (e.PropertyName == CoolPicker.PlaceholderColorProperty.PropertyName)
                 UpdatePlaceholder();
+            else if (e.PropertyName == CoolPicker.HorizontalTextAlignmentProperty.PropertyName)
+                Control.Gravity = ExchangeAlignmentFlag((Element as CoolPicker).HorizontalTextAlignment);
+            else if (e.PropertyName == Picker.SelectedIndexProperty.PropertyName)
+            {
+                var picker = Element as CoolPicker;
+                if (picker.SelectedIndex >= 0) Control.Gravity = ExchangeAlignmentFlag(picker.HorizontalTextAlignment);
+                else Control.Gravity = GravityFlags.Left;
+            }
+        }
+
+        GravityFlags ExchangeAlignmentFlag(Xamarin.Forms.TextAlignment alignment)
+        {
+            switch (alignment)
+            {
+                case Xamarin.Forms.TextAlignment.Start:
+                    return GravityFlags.Left;
+                case Xamarin.Forms.TextAlignment.Center:
+                    return GravityFlags.Center;
+                case Xamarin.Forms.TextAlignment.End:
+                    return GravityFlags.Right;
+            }
+            return GravityFlags.Start;
         }
 
         void OnClick()

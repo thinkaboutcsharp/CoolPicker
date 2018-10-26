@@ -22,6 +22,7 @@ namespace XamarinStudy11
         public ReactiveProperty<Color> pPickerBarColor { get; } = new ReactiveProperty<Color>(Color.Default);
         public ReactiveProperty<Color> pPickerTextColor { get; } = new ReactiveProperty<Color>(Color.Default);
         public ReactiveProperty<Color> pPickerBarTextColor { get; } = new ReactiveProperty<Color>(Color.Default);
+        public ReactiveProperty<TextAlignment> pPickerTextAlignment { get; } = new ReactiveProperty<TextAlignment>(TextAlignment.Center);
 
         public ICommand ToggleCommand { get; set; }
 
@@ -34,10 +35,10 @@ namespace XamarinStudy11
 
         void InitBinding()
         {
-            //for (int i = 0; i < 10; i++)
-            //{
-            //    PickerSource.Add(new PickerItem { Key = i, Value = "Item " + i });
-            //}
+            for (int i = 0; i < 10; i++)
+            {
+                PickerSource.Add(new PickerItem { Key = i, Value = "Item " + i });
+            }
 
             pTextColor.Value = GetXColor(model.TextColor);
             pBackgroundColor.Value = GetXColor(model.BackgroundColor);
@@ -50,6 +51,7 @@ namespace XamarinStudy11
             pPickerBarColor.Value = GetXColor(model.PickerBarColor);
             pPickerTextColor.Value = GetXColor(model.PickerTextColor);
             pPickerBarTextColor.Value = GetXColor(model.PickerBarTextColor);
+            pPickerTextAlignment.Value = (TextAlignment)model.HorizontalTextAlignmentInt;
         }
 
         void Toggle(string propertyName)
@@ -91,6 +93,9 @@ namespace XamarinStudy11
                     break;
                 case "PickerBarTextColor":
                     pPickerBarTextColor.Value = GetXColor(model.TogglePickerBarTextColor());
+                    break;
+                case "HorizontalTextAlignment":
+                    pPickerTextAlignment.Value = (TextAlignment)model.ToggleHorizontalTextAlignment();
                     break;
             }
         }

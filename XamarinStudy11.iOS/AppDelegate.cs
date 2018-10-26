@@ -24,7 +24,7 @@ namespace XamarinStudy11.iOS
         {
             global::Xamarin.Forms.Forms.Init();
 
-            CoolPicker.iOS.Initialize.Init();
+            CoolControl.iOS.Initialize.Init();
 
             LoadApplication(new App());
 

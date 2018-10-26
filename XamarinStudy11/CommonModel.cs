@@ -19,6 +19,8 @@ namespace XamarinStudy11
         internal Color PickerTextColor { get; private set; } = Color.Transparent;
         internal Color PickerBarTextColor { get; private set; } = Color.Transparent;
 
+        internal int HorizontalTextAlignmentInt { get; private set; } = 0; //Start
+
         internal Color ToggleTextColor()
         {
             if (TextColor == Color.Transparent)
@@ -117,6 +119,17 @@ namespace XamarinStudy11
             else
                 PickerBarTextColor = Color.Transparent;
             return PickerBarTextColor;
+        }
+
+        internal int ToggleHorizontalTextAlignment()
+        {
+            if (HorizontalTextAlignmentInt == 0)
+                HorizontalTextAlignmentInt = 1;
+            else if (HorizontalTextAlignmentInt == 1)
+                HorizontalTextAlignmentInt = 2;
+            else
+                HorizontalTextAlignmentInt = 0;
+            return HorizontalTextAlignmentInt;
         }
     }
 }

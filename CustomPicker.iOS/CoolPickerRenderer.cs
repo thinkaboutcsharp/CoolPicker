@@ -8,9 +8,9 @@ using UIKit;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 
-[assembly: ExportRenderer(typeof(CoolPicker.CoolPicker), typeof(CoolPicker.iOS.CoolPickerRenderer))]
+[assembly: ExportRenderer(typeof(CoolControl.CoolPicker), typeof(CoolControl.iOS.CoolPickerRenderer))]
 
-namespace CoolPicker.iOS
+namespace CoolControl.iOS
 {
     class ExtendedField : UITextField
     {
@@ -133,6 +133,8 @@ namespace CoolPicker.iOS
                 UpdatePickerBarTextColor();
             else if (e.PropertyName == CoolPicker.PlaceholderColorProperty.PropertyName)
                 UpdatePlaceholder();
+            else if (e.PropertyName == CoolPicker.HorizontalTextAlignmentProperty.PropertyName)
+                UpdatePicker();
             else if (e.PropertyName == CoolPicker.PickerTextColorProperty.PropertyName)
             { /* Automatically change by Delegate */ }
         }
@@ -322,7 +324,27 @@ namespace CoolPicker.iOS
             var pickerView = (UIPickerView)Control.InputView;
             UpdatePlaceholder();
             var oldText = Control.Text;
-            Control.Text = recentSelectedIndex == -1 || items == null || recentSelectedIndex >= items.Count ? "" : items[recentSelectedIndex];
+            if (recentSelectedIndex == -1 || items == null || recentSelectedIndex >= items.Count)
+            {
+                Control.TextAlignment = UITextAlignment.Natural;
+                Control.Text =  "";
+            }
+            else
+            {
+                switch ((Element as CoolPicker).HorizontalTextAlignment)
+                {
+                    case TextAlignment.Start:
+                        Control.TextAlignment = UITextAlignment.Left;
+                        break;
+                    case TextAlignment.Center:
+                        Control.TextAlignment = UITextAlignment.Center;
+                        break;
+                    case TextAlignment.End:
+                        Control.TextAlignment = UITextAlignment.Right;
+                        break;
+                }
+                Control.Text =  items[recentSelectedIndex];
+            }
             if (oldText != Control.Text)
                 ((IVisualElementController)Element).NativeSizeChanged();
             pickerView.ReloadAllComponents();

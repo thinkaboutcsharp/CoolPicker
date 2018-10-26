@@ -1,6 +1,6 @@
 ﻿using Xamarin.Forms;
 
-namespace CoolPicker
+namespace CoolControl
 {
     public class CoolPicker : Picker
     {
@@ -65,6 +65,13 @@ namespace CoolPicker
         {
             get => (Color)GetValue(PickerBarTextColorProperty);
             set { SetValue(PickerBarTextColorProperty, value); }
+        }
+
+        public static readonly BindableProperty HorizontalTextAlignmentProperty = BindableProperty.Create("HorizontalTextAlignment", typeof(TextAlignment), typeof(CoolPicker), TextAlignment.Start);
+        public TextAlignment HorizontalTextAlignment
+        {
+            get => (TextAlignment)GetValue(HorizontalTextAlignmentProperty);
+            set => SetValue(HorizontalTextAlignmentProperty, value);
         }
     }
 }
