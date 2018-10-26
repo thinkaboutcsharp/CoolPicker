@@ -20,4 +20,7 @@
   <ItemGroup>
     <PackageReference Include="Xamarin.Forms" Version="3.3.0.912540" />
   </ItemGroup>
+  <ItemGroup>
+    <None Remove="Tac.CoolPicker.0.1.0.nupkg" />
+  </ItemGroup>
 </Project>
