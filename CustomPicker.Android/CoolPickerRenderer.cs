@@ -17,8 +17,9 @@ using xColor = Xamarin.Forms.Color;
 using System.ComponentModel;
 using Android.Graphics;
 using Android.Runtime;
+using CoolControl;
 
-[assembly: ExportRenderer(typeof(CoolControl.CoolPicker), typeof(CoolControl.Android.CoolPickerRenderer))]
+[assembly: ExportRenderer(typeof(CoolPicker), typeof(CoolControl.Android.CoolPickerRenderer))]
 
 namespace CoolControl.Android
 {

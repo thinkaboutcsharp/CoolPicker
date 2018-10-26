@@ -7,7 +7,7 @@
     <ProjectGuid>{BD1945D9-6A3F-431E-83A5-93B7AFEDC457}</ProjectGuid>
     <ProjectTypeGuids>{EFBA0AD7-5A72-4C68-AF49-83D382785DCF};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
-    <RootNamespace>CoolPicker.Android</RootNamespace>
+    <RootNamespace>CoolControl.Android</RootNamespace>
     <AssemblyName>CoolPicker.Android</AssemblyName>
     <TargetFrameworkVersion>v9.0</TargetFrameworkVersion>
     <AndroidResgenFile>Resources\Resource.designer.cs</AndroidResgenFile>
@@ -130,9 +130,9 @@
     <AndroidResource Include="Resources\values\Strings.xml" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CustomPicker\CoolPicker.csproj">
+    <ProjectReference Include="..\CustomPicker\CoolControl.csproj">
       <Project>{9DFE0473-2F44-4A7C-A9D4-DF14AF0D99BB}</Project>
-      <Name>CoolPicker</Name>
+      <Name>CoolControl</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />

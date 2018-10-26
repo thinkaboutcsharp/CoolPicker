@@ -98,7 +98,7 @@
     </ProjectReference>
     <ProjectReference Include="..\CustomPicker.Android\CoolPicker.Android.csproj">
       <Project>{BD1945D9-6A3F-431E-83A5-93B7AFEDC457}</Project>
-      <Name>CoolPicker.Android</Name>
+      <Name>CoolControl.Android</Name>
     </ProjectReference>
   </ItemGroup>
  <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />

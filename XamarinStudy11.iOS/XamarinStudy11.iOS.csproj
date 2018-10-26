@@ -158,7 +158,7 @@
     </ProjectReference>
     <ProjectReference Include="..\CustomPicker.iOS\CoolPicker.iOS.csproj">
       <Project>{D21FBD68-F12D-4C2F-A08A-60450B2B5D93}</Project>
-      <Name>CoolPicker.iOS</Name>
+      <Name>CoolControl.iOS</Name>
     </ProjectReference>
   </ItemGroup>
 </Project>

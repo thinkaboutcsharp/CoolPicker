@@ -7,8 +7,9 @@ using ObjCRuntime;
 using UIKit;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
+using CoolControl;
 
-[assembly: ExportRenderer(typeof(CoolControl.CoolPicker), typeof(CoolControl.iOS.CoolPickerRenderer))]
+[assembly: ExportRenderer(typeof(CoolPicker), typeof(CoolControl.iOS.CoolPickerRenderer))]
 
 namespace CoolControl.iOS
 {

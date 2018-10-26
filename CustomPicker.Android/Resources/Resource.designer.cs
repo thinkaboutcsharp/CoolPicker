@@ -9,9 +9,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: global::Android.Runtime.ResourceDesignerAttribute("CoolPicker.Android.Resource", IsApplication=false)]
+[assembly: global::Android.Runtime.ResourceDesignerAttribute("CoolControl.Android.Resource", IsApplication=false)]
 
-namespace CoolPicker.Android
+namespace CoolControl.Android
 {
 	
 	

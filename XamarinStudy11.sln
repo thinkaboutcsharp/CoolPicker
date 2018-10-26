@@ -9,13 +9,18 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XamarinStudy11", "XamarinSt
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{8A91C071-7219-4FA0-9480-F841512ABD5B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoolPicker", "CustomPicker\CoolPicker.csproj", "{9DFE0473-2F44-4A7C-A9D4-DF14AF0D99BB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoolControl", "CustomPicker\CoolControl.csproj", "{9DFE0473-2F44-4A7C-A9D4-DF14AF0D99BB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoolPicker.iOS", "CustomPicker.iOS\CoolPicker.iOS.csproj", "{D21FBD68-F12D-4C2F-A08A-60450B2B5D93}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoolControl.iOS", "CustomPicker.iOS\CoolControl.iOS.csproj", "{D21FBD68-F12D-4C2F-A08A-60450B2B5D93}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoolPicker.Android", "CustomPicker.Android\CoolPicker.Android.csproj", "{BD1945D9-6A3F-431E-83A5-93B7AFEDC457}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoolControl.Android", "CustomPicker.Android\CoolControl.Android.csproj", "{BD1945D9-6A3F-431E-83A5-93B7AFEDC457}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Library", "Library", "{51E7AD40-4D8B-4AE6-BEC2-E48E7920A3C8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{7122ABD0-D175-4118-9C40-72437917392B}"
+	ProjectSection(SolutionItems) = preProject
+		nuget\CoolPicker.Library.nuspec = nuget\CoolPicker.Library.nuspec
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
