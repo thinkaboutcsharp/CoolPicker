@@ -34,10 +34,10 @@ namespace XamarinStudy11
 
         void InitBinding()
         {
-            for (int i = 0; i < 10; i++)
-            {
-                PickerSource.Add(new PickerItem { Key = i, Value = "Item " + i });
-            }
+            //for (int i = 0; i < 10; i++)
+            //{
+            //    PickerSource.Add(new PickerItem { Key = i, Value = "Item " + i });
+            //}
 
             pTextColor.Value = GetXColor(model.TextColor);
             pBackgroundColor.Value = GetXColor(model.BackgroundColor);

@@ -146,7 +146,6 @@ namespace CoolPicker.iOS
             customEntry.EditingChanged += OnEditing;
             customEntry.EditingDidEnd += OnEnded;
 
-            customEntry.InputView = originalEntry.InputView;
             customEntry.InputAccessoryView = originalEntry.InputAccessoryView;
 
             var toolBar = (UIToolbar)customEntry.InputAccessoryView;
@@ -162,8 +161,15 @@ namespace CoolPicker.iOS
                     {
                         UpdatePickerSelectedIndex(0);
                     }
-                    UpdateTextColor();
-                    Control.Text = Element.Items[selectedIndex];
+                    else if (selectedIndex >= 0 && Element.Items.Count > 0)
+                    {
+                        UpdateTextColor();
+                        Control.Text = Element.Items[selectedIndex];
+                    }
+                    else if (selectedIndex >= 0)
+                    {
+                        selectedIndex = -1;
+                    }
                     ElementController.SetValueFromRenderer(Picker.SelectedIndexProperty, selectedIndex);
                     customEntry.ResignFirstResponder();
                 }

@@ -39,6 +39,7 @@ namespace CoolPicker.Android
         Drawable defaultTextFieldDrawable;
 
         AlertDialog pickerView;
+        AlertDialog confirmView;
 
         public CoolPickerRenderer(Context context) : base(context)
         {
@@ -105,21 +106,33 @@ namespace CoolPicker.Android
 
         void OnClick()
         {
-            var type = Control.InputType;
-
             var picker = Element as CoolPicker;
-            var dataPicker = new CoolDataPicker(Context) { BackgroundColor = picker.PickerColor };
-            if (picker.Items != null && picker.Items.Count > 0)
+            var layout = new LinearLayout(Context) { Orientation = wOrientation.Vertical };
+
+            if (picker.Items == null || picker.Items.Count == 0)
             {
-                dataPicker.MaxValue = picker.Items.Count - 1;
-                dataPicker.MinValue = 0;
-                dataPicker.SetDisplayedValues(picker.Items.ToArray());
-                dataPicker.WrapSelectorWheel = false;
-                dataPicker.DescendantFocusability = DescendantFocusability.BlockDescendants;
-                dataPicker.Value = picker.SelectedIndex;
+                var confirm = new AlertDialog.Builder(Context);
+                layout.AddView(new EditText(Context) { Text = "リストが設定されていません。", Focusable = false });
+                layout.SetBackgroundColor(picker.PickerColor.ToAndroid());
+                confirm.SetTitle("！");
+                confirm.SetView(layout);
+                confirm.SetPositiveButton(global::Android.Resource.String.Ok, (s, e) =>
+                {
+                    confirmView = null;
+                });
+                confirmView = confirm.Create();
+                confirm.Show();
+                return;
             }
 
-            var layout = new LinearLayout(Context) { Orientation = wOrientation.Vertical };
+            var dataPicker = new CoolDataPicker(Context) { BackgroundColor = picker.PickerColor };
+            dataPicker.MaxValue = picker.Items.Count - 1;
+            dataPicker.MinValue = 0;
+            dataPicker.SetDisplayedValues(picker.Items.ToArray());
+            dataPicker.WrapSelectorWheel = false;
+            dataPicker.DescendantFocusability = DescendantFocusability.BlockDescendants;
+            dataPicker.Value = picker.SelectedIndex;
+
             layout.AddView(dataPicker);
 
             ElementController.SetValueFromRenderer(VisualElement.IsFocusedPropertyKey, true);
