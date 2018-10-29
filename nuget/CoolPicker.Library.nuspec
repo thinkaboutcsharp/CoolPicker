@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
     <metadata>
         <id>Tac.CoolPicker</id>
-        <version>0.1.0</version>
+        <version>0.1.0.00001</version>
         <title>CoolPicker for Xamarin.Forms</title>
         <authors>T.A.C.</authors>
         <owners>T.A.C.</owners>

@@ -22,5 +22,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Remove="Tac.CoolPicker.0.1.0.nupkg" />
+    <None Remove="Tac.CoolPicker.0.1.0.symbols.nupkg" />
   </ItemGroup>
 </Project>
